@@ -5,8 +5,9 @@ clc;
 
 days = 13:21;
 days_predicion = 13:25;
+days_last = days(end);
 
-regions = {'Italy' 'Spain' 'France' 'UK' 'Germany'};
+regions = {'Italy' 'Spain' 'France' 'UK' 'Germany' 'Belgium'};
 data = importdata('data.txt');
 num_regions = size(data,1);
 
@@ -20,11 +21,11 @@ for i=1:num_regions
   deceased = data(i,:);
   h(end+1) = plot(days,log2(deceased),'o','color',colors(i,:));
   hold on;
-  P = fminsearch(@(P) sum((log2(deceased) - (P(2).*(days-P(1)))).^2),[0;0]);
-  prediction_linear = P(2).*(days_predicion-P(1));
+  P = fminsearch(@(P) sum((log2(deceased) - (P(1) + P(2).*(days-days_last))).^2),[0;0]);
+  prediction_linear = P(1) + P(2).*(days_predicion-days_last);
   plot(days_predicion,prediction_linear,'--','color',colors(i,:));
-  P = fminsearch(@(P) sum((log2(deceased) - (P(2).*(days-P(1)) + P(3).*(days-P(1)).^2)).^2),[P(1);P(2);0]);
-  prediction_quadratic = P(2).*(days_predicion-P(1)) + P(3).*(days_predicion-P(1)).^2;
+  P = fminsearch(@(P) sum((log2(deceased) - (P(1) + P(2).*(days-days_last) + P(3).*(days-days_last).^2)).^2),[P(1);P(2);0]);
+  prediction_quadratic = P(1) + P(2).*(days_predicion-days_last) + P(3).*(days_predicion-days_last).^2;
   plot(days_predicion,prediction_quadratic,'-','color',colors(i,:));
 end
 ylabel('Deceased');
@@ -39,3 +40,4 @@ grid on;
 legend(h,regions,'location','southeast');
 set(gcf,'PaperUnits','inches','PaperPosition',[0 0 4 4].*1.4);
 print('-dpng','prediction.png');
+print('-depsc2','prediction.eps');

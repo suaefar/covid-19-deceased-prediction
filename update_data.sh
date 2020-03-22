@@ -1,8 +1,6 @@
 #!/bin/bash
 
-(cd COVID-19 && git pull)
-
-REGIONS=(',Italy,' ',Spain,' 'France,France,' 'United Kingdom,United Kingdom,' ',Germany,')
+REGIONS=(',Italy,' ',Spain,' 'France,France,' 'United Kingdom,United Kingdom,' ',Germany,' ',Belgium,')
 DATES=( 03-13-2020 \
         03-14-2020 \
         03-15-2020 \
