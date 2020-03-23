@@ -27,6 +27,9 @@ for i=1:num_regions
   P = fminsearch(@(P) sum((log2(deceased) - (P(1) + P(2).*(days-days_last) + P(3).*(days-days_last).^2)).^2),[P(1);P(2);0]);
   prediction_quadratic = P(1) + P(2).*(days_predicion-days_last) + P(3).*(days_predicion-days_last).^2;
   plot(days_predicion,prediction_quadratic,'-','color',colors(i,:));
+  next_day_prediction = P(1) + P(2) + P(3);
+  plot(days_last+1,next_day_prediction,'x','color',colors(i,:));
+  text(days_last+1,next_day_prediction, ['  ' num2str(2.^(next_day_prediction),'%5.0f')],'color',colors(i,:));
 end
 ylabel('Deceased');
 xlabel('Days in March');
