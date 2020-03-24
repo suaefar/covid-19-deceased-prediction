@@ -7,7 +7,7 @@ days = 13:23;
 days_predicion = 13:27;
 days_last = days(end);
 
-regions = {'Italy' 'Spain' 'Germany' 'Belgium'};
+regions = {'Italy' 'Spain' 'UK' 'Germany' 'Belgium' 'Austria'};
 data = importdata('data.txt');
 num_regions = size(data,1);
 

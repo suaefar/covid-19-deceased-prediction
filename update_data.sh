@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REGIONS=(',Italy,' ',Spain,' ',Germany,' ',Belgium,')
+REGIONS=(',Italy,' ',Spain,' 'United Kingdom,United Kingdom' ',Germany,' ',Belgium,' ',Austria,')
 DATES=( 03-13-2020 \
         03-14-2020 \
         03-15-2020 \
@@ -18,7 +18,8 @@ for REGION in "${REGIONS[@]}"; do
   for DATE in "${DATES[@]}"; do
     MAGICTOKEN=$(head -n1 "COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/${DATE}.csv" | cut -d, -f1)
     if [ "${MAGICTOKEN}" == "FIPS" ]; then
-      grep "${REGION// /\\ }" "COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/${DATE}.csv" | cut -d, -f9 | tr -d "\n"      
+      REGION_TMP=$(echo ${REGION} | sed 's/[^,]*//')
+      grep ",${REGION_TMP// /\\ }" "COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/${DATE}.csv" | cut -d, -f9 | tr -d "\n"      
     else
       grep "${REGION// /\\ }" "COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/${DATE}.csv" | cut -d, -f5 | tr -d "\n"
     fi
