@@ -42,5 +42,7 @@ grid on;
 
 legend(h,regions,'location','southeast');
 set(gcf,'PaperUnits','inches','PaperPosition',[0 0 4 4].*1.4);
-print('-dpng','prediction.png');
+drawnow;
 print('-depsc2','prediction.eps');
+print('-depsc2','prediction.eps');
+print('-dpng','prediction.png');
