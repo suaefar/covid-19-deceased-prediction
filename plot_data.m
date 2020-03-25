@@ -3,11 +3,11 @@ close all;
 clear;
 clc;
 
-days = 13:23;
-days_predicion = 13:27;
+days = 13:24;
+days_predicion = 13:28;
 days_last = days(end);
 
-regions = {'Italy' 'Spain' 'UK' 'Germany' 'Belgium' 'Austria'};
+regions = {'Italy' 'Spain' 'France' 'UK' 'Germany' 'Belgium' 'Austria'};
 data = importdata('data.txt');
 num_regions = size(data,1);
 
@@ -19,12 +19,13 @@ h = [];
 
 for i=1:num_regions
   deceased = data(i,:);
-  h(end+1) = plot(days,log2(deceased),'o','color',colors(i,:));
+  valid_days = ~isnan(deceased);
+  h(end+1) = plot(days(valid_days),log2(deceased(valid_days)),'o','color',colors(i,:));
   hold on;
-  P = fminsearch(@(P) sum((log2(deceased) - (P(1) + P(2).*(days-days_last))).^2),[0;0]);
+  P = fminsearch(@(P) sum((log2(deceased(valid_days)) - (P(1) + P(2).*(days(valid_days)-days_last))).^2),[0;0]);
   prediction_linear = P(1) + P(2).*(days_predicion-days_last);
   plot(days_predicion,prediction_linear,'--','color',colors(i,:));
-  P = fminsearch(@(P) sum((log2(deceased) - (P(1) + P(2).*(days-days_last) + P(3).*(days-days_last).^2)).^2),[P(1);P(2);0]);
+  P = fminsearch(@(P) sum((log2(deceased(valid_days)) - (P(1) + P(2).*(days(valid_days)-days_last) + P(3).*(days(valid_days)-days_last).^2)).^2),[P(1);P(2);0]);
   prediction_quadratic = P(1) + P(2).*(days_predicion-days_last) + P(3).*(days_predicion-days_last).^2;
   plot(days_predicion,prediction_quadratic,'-','color',colors(i,:));
   next_day_prediction = P(1) + P(2) + P(3);
