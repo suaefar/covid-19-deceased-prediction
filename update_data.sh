@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REGIONS=(',Italy,' ',Spain,' 'France,France,' 'United Kingdom,United Kingdom' ',Germany,' ',Belgium,' ',Austria,')
+REGIONS=(',Italy,' ',Spain,' 'France,France,' 'United Kingdom,United Kingdom' 'Netherlands,Netherlands,' ',Germany,' ',Belgium,' ',Sweden,' ',Austria,')
 DATES=( 03-13-2020 \
         03-14-2020 \
         03-15-2020 \
