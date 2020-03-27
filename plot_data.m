@@ -34,7 +34,7 @@ for i=1:num_regions
 end
 ylabel('Deceased');
 xlabel('Days in March');
-ytickvals = 2.^(0:15);
+ytickvals = 2.^(0:20);
 yticks(log2(ytickvals));
 yticklabels(ytickvals);
 xticks(days_predicion);
