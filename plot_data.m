@@ -3,8 +3,8 @@ close all;
 clear;
 clc;
 
-days = 13:26;
-days_predicion = 13:29;
+days = 13:27;
+days_predicion = 13:31;
 days_last = days(end);
 
 regions = {'Italy' 'Spain' 'France' 'UK' 'Netherlands' 'Germany' 'Belgium' 'Sweden' 'Austria'};
@@ -37,6 +37,7 @@ xlabel('Days in March');
 ytickvals = 2.^(0:20);
 yticks(log2(ytickvals));
 yticklabels(ytickvals);
+ylim([-3 log2(50000)]);
 xticks(days_predicion);
 xlim(days_predicion([1,end]));
 grid on;
