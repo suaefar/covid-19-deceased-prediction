@@ -1,13 +1,7 @@
 #!/bin/bash
 
 REGIONS=(',Italy,' ',Spain,' 'France,France,' 'United Kingdom,United Kingdom' 'Netherlands,Netherlands,' ',Germany,' ',Belgium,' ',Sweden,' ',Austria,')
-DATES=( 03-13-2020 \
-        03-14-2020 \
-        03-15-2020 \
-        03-16-2020 \
-        03-17-2020 \
-        03-18-2020 \
-        03-19-2020 \
+DATES=( 03-19-2020 \
         03-20-2020 \
         03-21-2020 \
         03-22-2020 \
@@ -15,6 +9,7 @@ DATES=( 03-13-2020 \
         03-24-2020 \
         03-25-2020 \
         03-26-2020 \
+        03-27-2020 \
       )
 
 for REGION in "${REGIONS[@]}"; do
