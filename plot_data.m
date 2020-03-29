@@ -3,8 +3,8 @@ close all;
 clear;
 clc;
 
-days = 19:27;
-days_predicion = 19:30;
+days = 20:28;
+days_predicion = 20:31;
 days_last = days(end);
 
 regions = {'Italy' 'Spain' 'France' 'UK' 'Netherlands' 'Germany' 'Belgium' 'Sweden' 'Austria'};
