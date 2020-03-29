@@ -14,7 +14,7 @@ num_regions = size(data,1);
 colors = lines(num_regions);
 
 graphics_toolkit qt;
-figure('Position',[0 0 400 400]);
+figure('Position',[0 0 400 500]);
 h = [];
 
 for i=1:num_regions
@@ -37,14 +37,13 @@ xlabel('Days in March');
 ytickvals = 2.^(0:20);
 yticks(log2(ytickvals));
 yticklabels(ytickvals);
-ylim([-3 log2(50000)]);
 xticks(days_predicion);
 xlim(days_predicion([1,end]));
 grid on;
-
+axis image;
+ylim([0 log2(20000)]);
 legend(h,regions,'location','southeast');
-set(gcf,'PaperUnits','inches','PaperPosition',[0 0 4 4].*1.4);
+set(gcf,'PaperUnits','inches','PaperPosition',[0 0 4 5].*1.4);
 drawnow;
-print('-depsc2','prediction.eps');
 print('-depsc2','prediction.eps');
 print('-dpng','prediction.png');
