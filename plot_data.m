@@ -3,8 +3,8 @@ close all;
 clear;
 clc;
 
-days = 20:28;
-days_predicion = 20:31;
+days = 21:29;
+days_predicion = 21:32;
 days_last = days(end);
 
 regions = {'Italy' 'Spain' 'France' 'UK' 'Netherlands' 'Germany' 'Belgium' 'Sweden' 'Austria'};
@@ -29,8 +29,9 @@ for i=1:num_regions
   prediction_quadratic = P(1) + P(2).*(days_predicion-days_last) + P(3).*(days_predicion-days_last).^2;
   plot(days_predicion,prediction_quadratic,'-','color',colors(i,:));
   next_day_prediction = P(1) + P(2) + P(3);
+  today_prediction = P(1);
   plot(days_last+1,next_day_prediction,'x','color',colors(i,:));
-  regions{i} = [regions{i} [' ( x - ' num2str(2.^(next_day_prediction),'%5.0f')] ')'];
+  regions{i} = [regions{i} ' x - ' num2str(2.^(next_day_prediction),'%5.0f') ' (' num2str(2.^(next_day_prediction)-2.^(today_prediction),'%+5.0f')  ')'];
 end
 ylabel('Deceased');
 xlabel('Days in March');
