@@ -3,7 +3,7 @@ close all;
 clear;
 clc;
 
-days = 12:30;
+days = -18:0;
 past_days_fit = 11;
 future_days_predicion = 3;
 
@@ -36,7 +36,7 @@ for i=1:num_regions
   regions{i} = [regions{i} ' x - ' num2str(2.^(next_day_prediction),'%5.0f') ' (' num2str(2.^(next_day_prediction)-2.^(today_prediction),'%+5.0f')  ')'];
 end
 ylabel('Deceased');
-xlabel('Days in March');
+xlabel('Days in April');
 ytickvals = 2.^(0:0.5:20);
 yticks(log2(ytickvals));
 yticklabels(round(ytickvals));
