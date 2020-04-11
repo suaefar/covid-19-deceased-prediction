@@ -7,7 +7,7 @@ days = -8:10;
 past_days_fit = 11;
 future_days_predicion = 3;
 
-regions = {'Italy' 'Spain' 'France' 'US' 'UK' 'Netherlands' 'Germany' 'Sweden'};
+regions = {'US' 'Italy' 'Spain' 'France' 'UK' 'Germany' 'Netherlands' 'Sweden'};
 data = importdata('data.txt');
 num_regions = size(data,1);
 
