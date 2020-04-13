@@ -43,7 +43,7 @@ yticklabels(round(ytickvals));
 xticks(days(1):days(end)+future_days_predicion);
 grid on;
 xlim([days(1)-1 days(end)+future_days_predicion+1]);
-ylim([2 15]);
+ylim([4 17]);
 legend(h,regions,'location','southeast');
 set(gcf,'PaperUnits','inches','PaperPosition',[0 0 5 5].*1.4);
 drawnow;
