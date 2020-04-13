@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REGIONS=(',US,' ',Italy,' ',Spain,' ',France,' ',United Kingdom' ',Germany,' ',Netherlands,' ',Sweden,')
+REGIONS=(',US,' ',Italy,' ',Spain,' ',France,' ',United Kingdom,' ',Belgium,' ',Germany,' ',Netherlands,' ',Sweden,')
 FIELDS="68-86"
 
 for REGION in "${REGIONS[@]}"; do

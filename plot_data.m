@@ -7,20 +7,21 @@ days = -6:12;
 past_days_fit = 11;
 future_days_predicion = 3;
 
-regions = {'US' 'Italy' 'Spain' 'France' 'UK' 'Germany' 'Netherlands' 'Sweden'};
+regions = {'US' 'Italy' 'Spain' 'France' 'UK' 'Belgium' 'Germany' 'Netherlands' 'Sweden'};
 data = importdata('data.txt');
 num_regions = size(data,1);
 
 colors = lines(num_regions);
 
 graphics_toolkit qt;
-figure('Position',[0 0 500 500]);
+figure('Position',[0 0 500 1000]);
+subplot(2,1,1);
 h = [];
 Ps = cell(1,num_regions);
-
+regions_info = regions;
 for i=1:num_regions
   deceased = data(i,:);
-  h(end+1) = plot(days,log2(deceased),'o','color',colors(i,:));
+  h(end+1) = plot(days,log2(deceased),'o','color',colors(i,:),'markerfacecolor',colors(i,:));
   hold on;
   y = log2(deceased(end-past_days_fit+1:end));
   x = -past_days_fit+1:0;
@@ -35,7 +36,7 @@ for i=1:num_regions
   Ps{i} = P;
   today_prediction = P(1);
   plot(days(end)+1,next_day_prediction,'x','color',colors(i,:));
-  regions{i} = [regions{i} ' x - ' num2str(2.^(next_day_prediction),'%5.0f') ' (' num2str(2.^(next_day_prediction)-2.^(today_prediction),'%+5.0f')  ')'];
+  regions_info{i} = [regions{i} ' x - ' num2str(2.^(next_day_prediction),'%5.0f') ' (' num2str(2.^(next_day_prediction)-2.^(today_prediction),'%+5.0f')  ')'];
 end
 ylabel('Deceased');
 xlabel('Days in April');
@@ -45,34 +46,32 @@ yticklabels(round(ytickvals));
 xticks(days(1):days(end)+future_days_predicion);
 grid on;
 xlim([days(1)-1 days(end)+future_days_predicion+1]);
-ylim([4 17]);
-legend(h,regions,'location','southeast');
-set(gcf,'PaperUnits','inches','PaperPosition',[0 0 5 5].*1.4);
+ylim([2 16]);
+legend(h,regions_info,'location','southeast');
+
+subplot(2,1,2);
+h = [];
+plot([0 50],[0 50],'--k');
+hold on;
+for i=1:num_regions
+  P = Ps{i};
+  x = min(50,1./P(2));
+  y = min(50,P(2)./max(eps,-P(3)));
+  s = 0.01.*2.^P(1);
+  h(end+1) = scatter(x, y, s, colors(i,:),'filled');
+  t = text(x,y,[' ' regions{i}]);
+end
+ylabel('Current curvature / Days to zero slope');
+xlabel('Current slope / Days doubling');
+xlim([0 50]);
+ylim([0 50]);
+xticks(0:7:50);
+yticks(0:7:50);
+axis image;
+grid on;
+
 drawnow;
+set(gcf,'PaperUnits','inches','PaperPosition',[0 0 5 10].*1.4);
 print('-depsc2','prediction.eps');
 print('-dpng','prediction.png');
 
-
-figure('Position',[0 0 500 500]);
-h = [];
-plot([-0.3 0.3],[0 0],'-k');
-hold on;
-plot([0 0],[-0.01 0.01],'-k');
-text(-0.15,0.005,'Slope negative and increasing','horizontalalignment','center')
-text(0.15,0.005,'Slope positve and increasing','horizontalalignment','center')
-text(0.15,-0.005,'Slope positve and decreasing','horizontalalignment','center')
-for i=1:num_regions
-  P = Ps{i};
-  h(end+1) = scatter(P(2), P(3), sqrt(2.^P(1)), colors(i,:),'filled');
-end
-ylabel('Curvature');
-xlabel('Slope');
-xticks([-0.3:0.05:-0.05 0 0.05:0.05:0.3]);
-yticks([-0.01:0.001:-0.001 0 0.001:0.001:0.01]);
-yticks();
-grid on;
-legend(h,regions,'location','southwest');
-set(gcf,'PaperUnits','inches','PaperPosition',[0 0 5 5].*1.4);
-drawnow;
-print('-depsc2','classification.eps');
-print('-dpng','classification.png');
