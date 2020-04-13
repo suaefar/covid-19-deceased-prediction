@@ -6,3 +6,6 @@ Predictions: First degree polynomial (dashed lines), second degree polynomial (s
 The crosses show the predicted numbers for the next day.
 
 Please consult plot_data.m for the details of the fit.
+
+![Image](classification.png)
+Curvature (change in slope) plotted over values of slope from second degree polynomial fits.
