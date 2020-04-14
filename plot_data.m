@@ -61,7 +61,7 @@ for i=1:num_regions
   h(end+1) = scatter(x, y, s, colors(i,:),'filled');
   t = text(x,y,[' ' regions{i}]);
 end
-ylabel('Current curvature / Days to zero slope');
+ylabel('Current curvature (bending) / Days to zero slope');
 xlabel('Current slope / Days doubling');
 xlim([0 50]);
 ylim([0 50]);
