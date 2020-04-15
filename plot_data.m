@@ -3,7 +3,7 @@ close all;
 clear;
 clc;
 
-days = -5:13;
+days = -4:14;
 past_days_fit = 11;
 future_days_predicion = 3;
 
@@ -17,7 +17,7 @@ graphics_toolkit qt;
 figure('Position',[0 0 500 1000]);
 subplot(2,1,1);
 h = [];
-Ps = cell(1,num_regions);
+Ds = cell(1,num_regions);
 regions_info = regions;
 for i=1:num_regions
   deceased = data(i,:);
@@ -25,15 +25,15 @@ for i=1:num_regions
   hold on;
   y = log2(deceased(end-past_days_fit+1:end));
   x = -past_days_fit+1:0;
-  P = fminsearch(@(P) sum((y - (P(1) + P(2).*x)).^2),[0;0]);
+  P = fminunc(@(P) sum((y - (P(1) + P(2).*x)).^2),[0;0]);
   xi = 1-past_days_fit:future_days_predicion;
   prediction_linear = P(1) + P(2).*xi;
   plot(days(end)+xi,prediction_linear,'--','color',colors(i,:));
-  P = fminsearch(@(P) sum((y - (P(1) + P(2).*x + P(3).*x.^2)).^2),[P(1);P(2);0]);
+  P = fminunc(@(P) sum((y - (P(1) + P(2).*x + P(3).*x.^2)).^2),[P(1);P(2);0]);
   prediction_quadratic = P(1) + P(2).*xi + P(3).*xi.^2;
   plot(days(end)+xi,prediction_quadratic,'-','color',colors(i,:));
   next_day_prediction = P(1) + P(2) + P(3);
-  Ps{i} = P;
+  Ds{i} = P;
   today_prediction = P(1);
   plot(days(end)+1,next_day_prediction,'x','color',colors(i,:));
   regions_info{i} = [regions{i} ' x - ' num2str(2.^(next_day_prediction),'%5.0f') ' (' num2str(2.^(next_day_prediction)-2.^(today_prediction),'%+5.0f')  ')'];
@@ -54,10 +54,10 @@ h = [];
 plot([0 50],[0 50],'--k');
 hold on;
 for i=1:num_regions
-  P = Ps{i};
-  x = min(50,1./P(2));
-  y = min(50,P(2)./max(eps,-P(3)));
-  s = 0.01.*2.^P(1);
+  D = Ds{i};
+  x = min(50,1./D(2));
+  y = min(50,D(2)./max(eps,-D(3)));
+  s = 0.01.*2.^D(1);
   h(end+1) = scatter(x, y, s, colors(i,:),'filled');
   t = text(x,y,[' ' regions{i}]);
 end
