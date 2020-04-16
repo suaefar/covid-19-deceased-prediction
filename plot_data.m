@@ -19,17 +19,20 @@ subplot(2,1,1);
 h = [];
 Ds = cell(1,num_regions);
 regions_info = regions;
+
+asymmetry = @(x) min(x,0) + max(x,0).*4;
+
 for i=1:num_regions
   deceased = data(i,:);
   h(end+1) = plot(days,log2(deceased),'o','color',colors(i,:),'markerfacecolor',colors(i,:));
   hold on;
   y = log2(deceased(end-past_days_fit+1:end));
   x = -past_days_fit+1:0;
-  P = fminunc(@(P) sum((y - (P(1) + P(2).*x)).^2),[0;0]);
+  P = fminsearch(@(P) sum(asymmetry(y - (P(1) + P(2).*x)).^2),[0;0]);
   xi = 1-past_days_fit:future_days_predicion;
   prediction_linear = P(1) + P(2).*xi;
   plot(days(end)+xi,prediction_linear,'--','color',colors(i,:));
-  P = fminunc(@(P) sum((y - (P(1) + P(2).*x + P(3).*x.^2)).^2),[P(1);P(2);0]);
+  P = fminsearch(@(P) sum(asymmetry(y - (P(1) + P(2).*x + P(3).*x.^2)).^2),[P(1);P(2);0]);
   prediction_quadratic = P(1) + P(2).*xi + P(3).*xi.^2;
   plot(days(end)+xi,prediction_quadratic,'-','color',colors(i,:));
   next_day_prediction = P(1) + P(2) + P(3);
