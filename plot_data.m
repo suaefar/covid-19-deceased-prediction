@@ -3,7 +3,7 @@ close all;
 clear;
 clc;
 
-days = -2:16;
+days = 0:18;
 past_days_fit = 11;
 future_days_predicion = 3;
 
@@ -28,11 +28,11 @@ for i=1:num_regions
   hold on;
   y = log2(deceased(end-past_days_fit+1:end));
   x = -past_days_fit+1:0;
-  P = fminsearch(@(P) sum(asymmetry(y - (P(1) + P(2).*x)).^2),[0;0]);
+  P = fminunc(@(P) sum(asymmetry(y - (P(1) + P(2).*x)).^2),[0;0]);
   xi = 1-past_days_fit:future_days_predicion;
   prediction_linear = P(1) + P(2).*xi;
   plot(days(end)+xi,prediction_linear,'--','color',colors(i,:));
-  P = fminsearch(@(P) sum(asymmetry(y - (P(1) + P(2).*x + P(3).*x.^2)).^2),[P(1);P(2);0]);
+  P = fminunc(@(P) sum(asymmetry(y - (P(1) + P(2).*x + P(3).*x.^2)).^2),[P(1);P(2);0]);
   prediction_quadratic = P(1) + P(2).*xi + P(3).*xi.^2;
   plot(days(end)+xi,prediction_quadratic,'-','color',colors(i,:));
   next_day_prediction = P(1) + P(2) + P(3);
