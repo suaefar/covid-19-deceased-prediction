@@ -3,7 +3,7 @@ close all;
 clear;
 clc;
 
-days = 2:20;
+days = 3:21;
 past_days_fit = 11;
 future_days_predicion = 3;
 
@@ -49,7 +49,7 @@ yticklabels(round(ytickvals));
 xticks(days(1):days(end)+future_days_predicion);
 grid on;
 xlim([days(1)-1 days(end)+future_days_predicion+1]);
-ylim([2 16]);
+ylim([3 17]);
 legend(h,regions_info,'location','southeast');
 
 subplot(2,1,2);
