@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REGIONS=(',US,' ',Italy,' ',Spain,' ',France,' ',United Kingdom,' ',Belgium,' ',Germany,' ',Netherlands,' ',Sweden,')
-FIELDS="77-95"
+FIELDS="79-97"
 
 for REGION in "${REGIONS[@]}"; do
   grep "^${REGION}" COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv | cut -d, -f${FIELDS} | tr "," " "
