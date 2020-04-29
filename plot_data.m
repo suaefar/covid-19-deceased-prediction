@@ -3,8 +3,8 @@ close all;
 clear;
 clc;
 
-days = 7:25;
-past_days_fit = 11;
+days = 6:28;
+past_days_fit = 14;
 future_days_predicion = 3;
 
 regions = {'US' 'Italy' 'Spain' 'France' 'UK' 'Belgium' 'Germany' 'Netherlands' 'Sweden'};
