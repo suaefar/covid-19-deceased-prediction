@@ -3,11 +3,11 @@ close all;
 clear;
 clc;
 
-days = -15:7;
+days = -14:8;
 past_days_fit = 14;
 future_days_predicion = 3;
 
-regions = {'US' 'Italy' 'Spain' 'France' 'UK' 'Belgium' 'Germany' 'Netherlands' 'Sweden'};
+regions = {'US' 'UK' 'Spain' 'Brazil' 'Germany' 'Mexico' 'India' 'Russia' 'Sweden'};
 data = importdata('data.txt');
 num_regions = size(data,1);
 
