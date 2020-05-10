@@ -3,7 +3,7 @@ close all;
 clear;
 clc;
 
-days = -14:8;
+days = -13:9;
 past_days_fit = 14;
 future_days_predicion = 3;
 
