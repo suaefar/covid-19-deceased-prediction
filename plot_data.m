@@ -3,7 +3,7 @@ close all;
 clear;
 clc;
 
-days = 3:25;
+days = 5:27;
 past_days_fit = 14;
 future_days_predicion = 3;
 
@@ -58,8 +58,8 @@ plot([0 50],[0 50],'--k');
 hold on;
 for i=1:num_regions
   D = Ds{i};
-  x = min(50,1./D(2));
-  y = min(50,D(2)./max(eps,-D(3)));
+  x = max(0,min(50,1./D(2)));
+  y = max(0,min(50,D(2)./max(eps,-D(3))));
   s = 0.01.*2.^D(1);
   h(end+1) = scatter(x, y, s, colors(i,:),'filled');
   t = text(x,y,[' ' regions{i}]);
