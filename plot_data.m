@@ -49,7 +49,7 @@ yticklabels(round(ytickvals));
 xticks(days(1):days(end)+future_days_predicion);
 grid on;
 xlim([days(1)-1 days(end)+future_days_predicion+1]);
-ylim([3 17]);
+ylim([6 18]);
 legend(h,regions_info,'location','southeast');
 
 subplot(2,1,2);
