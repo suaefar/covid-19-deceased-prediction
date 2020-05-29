@@ -3,7 +3,7 @@ close all;
 clear;
 clc;
 
-days = 5:27;
+days = 6:28;
 past_days_fit = 14;
 future_days_predicion = 3;
 
@@ -43,7 +43,7 @@ for i=1:num_regions
 end
 ylabel('Deceased');
 xlabel('Days in May');
-ytickvals = 2.^(0:0.5:20);
+ytickvals = 2.^(0:0.5:21);
 yticks(log2(ytickvals));
 yticklabels(round(ytickvals));
 xticks(days(1):days(end)+future_days_predicion);
