@@ -3,7 +3,7 @@ close all;
 clear;
 clc;
 
-days = (-22:0) + 10;
+days = (-22:0) + 12;
 past_days_fit = 14;
 future_days_predicion = 3;
 
@@ -14,8 +14,8 @@ num_regions = size(data,1);
 colors = lines(num_regions);
 
 graphics_toolkit qt;
-figure('Position',[0 0 500 1000]);
-subplot(2,1,1);
+figure('Position',[0 0 500 500]);
+%subplot(2,1,1);
 h = [];
 Ds = cell(1,num_regions);
 regions_info = regions;
@@ -52,29 +52,29 @@ xlim([days(1)-1 days(end)+future_days_predicion+1]);
 ylim([6 18]);
 legend(h,regions_info,'location','southeast');
 
-subplot(2,1,2);
-h = [];
-plot([0 50],[0 50],'--k');
-hold on;
-for i=1:num_regions
-  D = Ds{i};
-  x = max(0,min(50,1./D(2)));
-  y = max(0,min(50,D(2)./max(eps,-D(3))));
-  s = 0.01.*2.^D(1);
-  h(end+1) = scatter(x, y, s, colors(i,:),'filled');
-  t = text(x,y,[' ' regions{i}]);
-end
-ylabel('Current curvature (bending) / Days to zero slope');
-xlabel('Current slope / Days doubling');
-xlim([0 50]);
-ylim([0 50]);
-xticks(0:7:50);
-yticks(0:7:50);
-axis image;
-grid on;
+%subplot(2,1,2);
+%h = [];
+%plot([0 50],[0 50],'--k');
+%hold on;
+%for i=1:num_regions
+%  D = Ds{i};
+%  x = max(0,min(50,1./D(2)));
+%  y = max(0,min(50,D(2)./max(eps,-D(3))));
+%  s = 0.01.*2.^D(1);
+%  h(end+1) = scatter(x, y, s, colors(i,:),'filled');
+%  t = text(x,y,[' ' regions{i}]);
+%end
+%ylabel('Current curvature (bending) / Days to zero slope');
+%xlabel('Current slope / Days doubling');
+%xlim([0 50]);
+%ylim([0 50]);
+%xticks(0:7:50);
+%yticks(0:7:50);
+%axis image;
+%grid on;
 
 drawnow;
-set(gcf,'PaperUnits','inches','PaperPosition',[0 0 5 10].*1.4);
+set(gcf,'PaperUnits','inches','PaperPosition',[0 0 5 5].*1.4);
 print('-depsc2','prediction.eps');
 print('-dpng','prediction.png');
 
