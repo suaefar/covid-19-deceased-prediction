@@ -7,4 +7,4 @@ The crosses show the predicted numbers for the next day.
 
 Please consult plot_data.m for the details of the fit.
 
-Curvature (change in slope) plotted over values of slope from second degree polynomial fits.
+%Curvature (change in slope) plotted over values of slope from second degree polynomial fits.
